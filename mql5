@@ -1,0 +1,68 @@
+
+//+------------------------------------------------------------------+
+//|                                             Provlepsis Simple.mq5 |
+//|                            Copyright 2022, Forex Robot Easy Team |
+//|                                          https://forexroboteasy.com |
+//+------------------------------------------------------------------+
+
+// Indicator parameters
+input int TimeFactor = 2; // Time factor for adjusting forecasted range
+
+// Global variables
+datetime lastBarTime; // Time of the last analyzed bar
+
+//+------------------------------------------------------------------+
+//| Custom indicator initialization function                         |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // Initialize global variables
+    lastBarTime = 0;
+    
+    return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//| Custom indicator deinitialization function                       |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+    // Cleanup resources if required
+}
+
+//+------------------------------------------------------------------+
+//| Custom indicator iteration function                              |
+//+------------------------------------------------------------------+
+int OnCalculate(const int rates_total, const int prev_calculated, const datetime &time[], const double &open[], const double &high[], const double &low[], const double &close[], const long &tick_volume[], const long &volume[], const int &spread[])
+{
+    // Calculate the forecasted range based on past bars
+    
+    // Check if a new bar has formed
+    if (time[rates_total-1] > lastBarTime)
+    {
+        // Update the last analyzed bar time
+        lastBarTime = time[rates_total-1];
+        
+        // Analyze past bars and calculate potential market movement
+        
+        // Adjust the forecasted range based on the time factor
+        double adjustedRange = CalculateRange() * TimeFactor;
+        
+        // Perform trading logic based on the forecasted range
+        
+        // Print the forecasted range for debugging purposes
+        Print('Forecasted Range: ', adjustedRange);
+    }
+    
+    return(rates_total);
+}
+
+//+------------------------------------------------------------------+
+//| Function to calculate the range based on past bars                |
+//+------------------------------------------------------------------+
+double CalculateRange()
+{
+    // Perform range calculation logic here
+    
+    return(100.0); // Placeholder value, replace with actual calculation
+}
